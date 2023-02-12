@@ -1,0 +1,16 @@
+{
+  "name": "hapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^21.2.2"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "description": ""
+}
