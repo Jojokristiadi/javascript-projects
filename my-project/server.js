@@ -1,31 +1,19 @@
-'use strict';
-
 const Hapi = require('@hapi/hapi');
-
+const routes = require('./routes');
+ 
 const init = async () => {
-
     const server = Hapi.server({
-        port: 3000,
-        host: 'localhost'
+        port: 5000,
+        host: 'localhost',
     });
-
-    server.route({
-        method: 'GET',
-        path: '/',
-        handler: (request, h) => {
-
-            return 'Hello World!';
-        }
-    });
-
+    server.route(routes)
+ 
     await server.start();
-    console.log('Server running on %s', server.info.uri);
+    console.log(`Server berjalan pada ${server.info.uri}`);
 };
-
-process.on('unhandledRejection', (err) => {
-
-    console.log(err);
-    process.exit(1);
-});
-
+ 
 init();
+
+//menambahkan line 2 dan 9
+// const routes = require('./routes')
+//server.routes(routes)
