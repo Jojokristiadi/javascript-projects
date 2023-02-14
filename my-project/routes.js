@@ -36,7 +36,12 @@ const routes = [
 
             const { name = 'Stranger'} = request.params
             const { lang} = request.query //memasukkan query parameter
+
+            if(lang === 'id'){
+                return `Hai, ${name}`
+            }
             return `Hello ${name}!`
+            //bila masukkan curl -X GET http://localhost:5000/hello/dicoding?lang=id maka bagian 41 akan jalan
             //masukkan curl -X GET http://localhost:5000/hello/name
         }
     },
