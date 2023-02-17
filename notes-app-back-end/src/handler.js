@@ -1,3 +1,5 @@
+const { nanoid } = require('nanoid');
+const notes = require('./notes');
 // eslint-disable-next-line no-unused-vars
 const addNoteHandler = (request, h) => {
   const { title, tags, body } = request.payload;
@@ -45,3 +47,4 @@ const addNoteHandler = (request, h) => {
   return response;
   // eslint-disable-next-line indent
 };
+module.exports = { addNoteHandler };
