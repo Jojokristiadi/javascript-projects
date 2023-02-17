@@ -7,6 +7,11 @@ const routes = [
     // eslint-disable-next-line quotes
     path: "/notes",
     handler: addNoteHandler,
+    option: {
+      cors: {
+        origin: ['*'],
+      },
+    },
   },
 ];
 
