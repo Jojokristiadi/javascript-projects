@@ -57,24 +57,59 @@ const getAllNotesHandler = () => ({
 });
 // eslint-disable-next-line no-unused-vars, consistent-return
 const getNoteByIdHandler = (request, h) => {
-  const { id } = request.param;
+  const { id } = request.params;
   const note = notes.filter((n) => n.id === id)[0];
 
   if (note !== undefined) {
     return {
       status: 'success',
       data: {
-        notes,
+        note,
       },
     };
   }
-  const response = h.request({
+  const response = h.response({
     status: 'fail',
-    message: 'pesan tidak ditemukan',
-
+    message: 'Catatan tidak ditemukan',
   });
-  // eslint-disable-next-line padded-blocks
+    // eslint-disable-next-line indent
   response.code(404);
   return response;
 };
-module.exports = { addNoteHandler, getAllNotesHandler, getNoteByIdHandler };
+
+const editNoteByIdHandler = (request, h) => {
+  const { id } = request.params;
+  const { title, tags, body } = request.payload;
+  const updatedAt = new Date().toISOString();
+  const index = notes.findIndex((note) => note.id === id);
+
+  if (index !== -1) {
+    notes[index] = {
+      ...notes[index],
+      title,
+      tags,
+      body,
+      updatedAt,
+    };
+    const response = h.response({
+      status: 'success',
+      message: 'Catatan berhasil diperbarui',
+    });
+    response.code(200);
+    return response;
+  }
+  const response = h.response({
+    status: 'fail',
+    message: 'Gagal memperbarui catatan. Id tidak ditemukan',
+  });
+    // eslint-disable-next-line indent
+  response.code(404);
+  return response;
+};
+module.exports = {
+  addNoteHandler,
+  getAllNotesHandler,
+  getNoteByIdHandler,
+  editNoteByIdHandler,
+// eslint-disable-next-line eol-last
+};
