@@ -106,6 +106,7 @@ const editNoteByIdHandler = (request, h) => {
   response.code(404);
   return response;
 };
+// eslint-disable-next-line consistent-return
 const deleteNoteByIdHandler = (request, h) => {
   const { id } = request.params;
   const index = notes.findIndex((note) => note.id === id);
@@ -120,6 +121,7 @@ const deleteNoteByIdHandler = (request, h) => {
     response.code(200);
     return response;
   }
+  // eslint-disable-next-line no-unused-vars
   const response = h.response({
     status: 'fail',
     message: 'Gagal bro untuk hapus',
