@@ -35,6 +35,7 @@ const addNoteHandler = (request, h) => {
       },
     });
     response.code(201);
+    response.header('Access-Control-Allow-Origin', '*');
     return response;
   }
   const response = h.response({
@@ -44,7 +45,36 @@ const addNoteHandler = (request, h) => {
     message: "Catatan gagal ditambahkan",
   });
   response.code(500);
+  response.header('Access-Control-Allow-Origin', '*');
   return response;
   // eslint-disable-next-line indent
 };
-module.exports = { addNoteHandler };
+const getAllNotesHandler = () => ({
+  status: 'success',
+  data: {
+    notes,
+  },
+});
+// eslint-disable-next-line no-unused-vars, consistent-return
+const getNoteByIdHandler = (request, h) => {
+  const { id } = request.param;
+  const note = notes.filter((n) => n.id === id)[0];
+
+  if (note !== undefined) {
+    return {
+      status: 'success',
+      data: {
+        notes,
+      },
+    };
+  }
+  const response = h.request({
+    status: 'fail',
+    message: 'pesan tidak ditemukan',
+
+  });
+  // eslint-disable-next-line padded-blocks
+  response.code(404);
+  return response;
+};
+module.exports = { addNoteHandler, getAllNotesHandler, getNoteByIdHandler };
